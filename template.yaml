@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  buzzmaker
+
+  Sample SAM Template for buzzmaker
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  DevKamiBuzzMaker:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: make_buzz/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Architectures:
+        - x86_64
+      Events:
+        CreateBuzz:
+          Type: Api
+          Properties:
+            Path: /makebuzz
+            Method: post
+
